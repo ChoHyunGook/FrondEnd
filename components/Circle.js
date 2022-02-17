@@ -1,7 +1,8 @@
 import React from "react";
+import Layout from "../containers/Layout";
 
-const Circle=()=>{
-    return <><h1>원넓이 계산기</h1>
+export default function Circle(){
+    return <Layout><h1>원넓이 계산기</h1>
     <form action="">
     <div>
     <img src="" alt="" />
@@ -13,6 +14,5 @@ const Circle=()=>{
     <button>입력</button><br />
 
     </form>
-    </>
+    </Layout>
 }
-export default Circle

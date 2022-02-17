@@ -1,7 +1,8 @@
 import React from "react";
+import Layout from "../containers/Layout";
 
-const Change=()=>{
-    return <><h1>잔돈계산기</h1>
+export default function Change(){
+    return <Layout><h1>잔돈계산기</h1>
     <form action="">
     <div>
     <img src="" alt="" />
@@ -10,6 +11,5 @@ const Change=()=>{
     <input type="text" />
     <button>입력</button>
     </form>
-    </>
+    </Layout>
 }
-export default Change
