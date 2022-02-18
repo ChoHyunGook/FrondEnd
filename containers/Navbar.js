@@ -14,6 +14,7 @@ export default function Navbar(){
         <Li><Link to="/grade">Grade</Link></Li>
         <Li><Link to="/login">Login Service</Link></Li>
         <Li><Link to="/week">WeekSalary</Link></Li>
+        <Li><Link to="/counter">Counter</Link></Li>
     </Ul>
   </nav>
 </div>)

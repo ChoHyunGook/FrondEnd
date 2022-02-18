@@ -8,6 +8,7 @@ import Circle from "./components/Circle";
 import Grade from "./components/Grade";
 import Login from "./components/Login";
 import Week from "./components/Week";
+import Counter from "./components/Counter";
 
 export default function App(){
   return useRoutes([
@@ -18,6 +19,7 @@ export default function App(){
     {path: "circle",element:<Circle />},
     {path: "grade",element:<Grade />},
     {path: "login",element:<Login />},
-    {path: "week",element:<Week />}
+    {path: "week",element:<Week />},
+    {path: "counter",element:<Counter />}
   ]);
 }
