@@ -2,20 +2,30 @@ import React,{useState} from "react";
 import Layout from "../containers/Layout";
 
 export default function Change(){
-    const[input,setInput]=useState(0);
-    const[result,setResult]=useState(0);
-    const sum =()=>{
-        let input=document.getElementById('input').value
-        console.log('투입금액:'+input)
-        setInput(input)
-        setResult(Number(input)-300)
+    const[inputs,setInputs]=useState({});
+    const{input}=inputs;
+
+    const handleChange=(e)=>{
+        e.preventDefault()
+        const{value,name}=e.target;
+        setInputs({
+            ...inputs,[name]:value
+        })
     }
-    return <Layout><h1>300원 커피 자판기 잔돈</h1>
+    const handleClick=(e)=>{
+        e.preventDefault()
+        const changeRequest={input}
+        alert(`사용자이름:${JSON.stringify(changeRequest)}`)
+    }
+    
+    return <Layout>
+    <form>
+        <h1>300원 커피 자판기 잔돈</h1>
     
     <label htmlFor="">투입하실 금액</label><br />
-    <input id="input" type="text" />
-    <button onClick={()=>{sum()}}>입력</button>
-    <div>투입금액:{input}<br/>잔돈:{result}</div>
-
+    <input type="text" name="input" onChange={handleChange} />
+    <button onClick={handleClick}>입력</button>
+    
+    </form>
     </Layout>
 }

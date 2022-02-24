@@ -1,35 +1,46 @@
 import React,{useState} from "react";
 import Layout from "../containers/Layout";
+import { useLinkClickHandler } from "react-router-dom";
+import axios from 'axios';
 
 export default function Bmi(){
-    const[name,setName]=useState();
-    const[inch,setInch]=useState(0);
-    const[weight,setWeight]=useState(0);
-    const[result,setResult]=useState(0.0);
-    const sum =()=>{
-        let name =document.getElementById('name').value
-        console.log('이름 :'+name)
-        let inch =document.getElementById('inch').value
-        console.log('키 :'+inch)
-        let weight =document.getElementById('weight').value
-        console.log('몸무게:'+weight)
-        setName(name)
-        setInch(inch)
-        setWeight(weight)
-        setResult(Number(weight)/Number(inch)*Number(inch))
+    const[inputs,setInputs]=useState({})
+    const {name,inch,weight}=inputs;//object Destructuring
+    
+    const handleChange = (e) => {
+     e.preventDefault()
+     const {value,name}=e.target;
+     setInputs({...inputs,[name]:value})
     }
 
-    return <Layout><h1>Bmi 계산기</h1>
-    
-    <label htmlFor="">이름</label><br />
-    <input id="name" type="" /><br />
-    <label htmlFor="">키</label><br />
-    <input id="inch" type="" /><br />
-    <label htmlFor="">몸무게</label><br />
-    <input id="weight" type="" /><br/>
-    <button onClick={()=>{sum()}}>입력</button><br />
-    <div>이름 : {name}<br /> 키 :{inch}<br/> 몸무게:{weight}<br/>Bmi지수:{result}</div>
+     const handleClick=(e)=>{
+         e.preventDefault()
+         const bmiRequest={name,inch,weight}
+         alert(` 사용자이름: ${JSON.stringify(bmiRequest)}`)
+         // axios.get(`http://localhost:8080/member/bmi/aaa/180.5/80.5`)
+         //     .then((res)=>{
+         //         alert(`답장이 도착했습니다 [내용] ${JSON.stringify(res.data)}`)
+         //     })
+         
+     }
+     
+     return (<Layout>
+        <form>
+        <h1>Bmi 계산기</h1>
+     <>
+     <label htmlFor="">이름</label><br />
+     <input type="text" name="name" onChange={handleChange}/><br />
+     <label htmlFor="">키</label><br />
+     <input type="text" name="inch" onChange={handleChange}/><br />
+     <label htmlFor="">몸무게</label><br />
+     <input type="text" name="weight" onChange={handleChange}/><br />
+     <button onClick={handleClick}>Bmi 체크</button><br/>
+     </>
+     </form>
+ 
+     </Layout>)
 
-    
-    </Layout>
 }
+
+   
+

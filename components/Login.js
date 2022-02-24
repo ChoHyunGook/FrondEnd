@@ -2,32 +2,31 @@ import React,{useState} from "react";
 import Layout from "../containers/Layout";
 
 export default function Login(){
-    const[id,setId]=useState();
-    const[pw,setPw]=useState();
-    const[name,setName]=useState();
-    const[result,setResult]=useState();
-    const sum=()=>{
-        let id=document.getElementById('id').value
-        console.log('ID:'+id)
-        let pw=document.getElementById('pw').value
-        console.log('PASSWORD:'+pw)
-        let name=document.getElementById('name').value
-        console.log('이름:'+name)
-        setId(id)
-        setPw(pw)
-        setName(name)
-        setResult("로그인성공")
-
+    const[inputs,setInputs]=useState({})
+    const{id,pw,name}=inputs;
+    
+    const handleChange=(e)=>{
+        e.preventDefault()
+        const{value,name}=e.target;
+        setInputs({
+            ...inputs,[name]:value
+        })
     }
-    return <Layout><h1>로그인</h1>
+    const handleClick=(e)=>{
+        e.preventDefault()
+        const loginRequest={id,pw,name}
+        alert(`사용자이름:${JSON.stringify(loginRequest)}`)
+    }
+    return <Layout><form><h1>로그인</h1>
     
     <label htmlFor="">ID</label><br />
-    <input id="id" type="" /><br />
+    <input type="text" name="id" onChange={handleChange} /><br />
     <label htmlFor="">Pw</label><br />
-    <input id="pw" type="" /><br/>
+    <input type="text" name="pw" onChange={handleChange}/><br/>
     <label htmlFor="">성함</label><br />
-    <input id="name"type="text" />
-    <button onClick={()=>{sum()}}>입력</button>
-    <div>ID:{id}<br/> PASSWORD:{pw}<br/> NAME:{name}<br/> 결과:{result}</div>
+    <input type="text" name="name" onChange={handleChange}/>
+    <button onClick={handleClick}>입력</button>
+    
+    </form>
     </Layout>
 }
