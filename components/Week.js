@@ -1,9 +1,11 @@
 import React,{useState} from "react";
+import { memberWeek } from "../api";
 import Layout from "../containers/Layout";
 
 export default function Week(){
     const[inputs,setInputs]=useState({})
     const{name,hour,day,salary}=inputs;
+    const[res,setRes]=useState('')
 
     const handleChange=(e)=>{
         e.preventDefault()
@@ -14,8 +16,8 @@ export default function Week(){
     }
     const handleClick=(e)=>{
         e.preventDefault()
-        const weekDefault={name,hour,day,salary}
-        alert(`사용자이름:${JSON.stringify(weekDefault)}`)
+        memberWeek({name,hour,day,salary}).then(res=>setRes(res.data))
+        .catch(err=>console.log(`error:${err}`))
     }
     
     return <Layout><form><h1>주급계산기</h1>
@@ -28,6 +30,7 @@ export default function Week(){
     <label htmlFor="">시급</label><br />
     <input name="salary"type="text" onChange={handleChange}/><br />
     <button onClick={handleClick}>입력</button><br />
-    
-    </form></Layout>
+    </form>
+    <>{res}</>
+    </Layout>
 }

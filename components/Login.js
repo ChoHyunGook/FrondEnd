@@ -1,10 +1,11 @@
 import React,{useState} from "react";
+import { memberLogin } from "../api";
 import Layout from "../containers/Layout";
 
 export default function Login(){
     const[inputs,setInputs]=useState({})
     const{id,pw,name}=inputs;
-    
+    const[res,setRes]=useState('')
     const handleChange=(e)=>{
         e.preventDefault()
         const{value,name}=e.target;
@@ -14,8 +15,8 @@ export default function Login(){
     }
     const handleClick=(e)=>{
         e.preventDefault()
-        const loginRequest={id,pw,name}
-        alert(`사용자이름:${JSON.stringify(loginRequest)}`)
+        memberLogin({id,pw,name}).then(res=>setRes(res.data))
+        .catch(err=>console.log(`error:${err}`))
     }
     return <Layout><form><h1>로그인</h1>
     
@@ -26,7 +27,7 @@ export default function Login(){
     <label htmlFor="">성함</label><br />
     <input type="text" name="name" onChange={handleChange}/>
     <button onClick={handleClick}>입력</button>
-    
     </form>
+    <>{res}</>
     </Layout>
 }

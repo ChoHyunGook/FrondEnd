@@ -1,10 +1,11 @@
 import React,{useState} from "react";
 import Layout from "../containers/Layout";
-import { useLinkClickHandler } from "react-router-dom";
+import { memberCircle } from "../api";
 
 export default function Circle(){
     const[inputs,setInputs]=useState({})
     const{half,pi}=inputs;
+    const[res,setRes]=useState('')
     
     const handleChange=(e)=>{
         e.preventDefault()
@@ -13,8 +14,8 @@ export default function Circle(){
     }
     const handleClick=(e)=>{
         e.preventDefault()
-        const cirRequest={half,pi}
-        alert(`사용자이름: ${JSON.stringify(cirRequest)}`)
+        memberCircle({half,pi}).then(res=>setRes(res.data))
+        .catch(err=>console.log(`error:${err}`))
     }
 
     return <Layout>
@@ -29,5 +30,6 @@ export default function Circle(){
     <button onClick={handleClick}>입력</button><br />
     </>
     </form>
+    <>{res}</>
     </Layout>
 }
